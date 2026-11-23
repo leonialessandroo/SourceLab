@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi siamo — SOURCE LAB</title>
+  <meta name="description" content="Source Lab è uno studio digitale di Verona: tre ragazzi che progettano, sviluppano e seguono siti web su misura, con preventivi chiari e una persona che ti risponde sempre." />
+  <!-- se arrivi da un'altra pagina del sito, lo schermo parte coperto dai quadrati viola -->
+  <script>try { if (sessionStorage.getItem("sl-pt")) document.documentElement.classList.add("pt-in"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;800;900&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="editorial.css?v=8" />
+  <link rel="stylesheet" href="motion.css?v=10" />
+  <link rel="stylesheet" href="about.css?v=23" />
+</head>
+<body class="page-about">
+
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="header">
+    <a href="index.html#contatti" class="pill pill--ghost"><span class="dot"></span>Contattaci</a>
+    <a href="index.html" class="logo" aria-label="Home">SOURCE LAB</a>
+    <nav class="header__right">
+      <a href="index.html#lavori" class="pill hide-sm">Lavori</a>
+      <button class="pill" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    </nav>
+  </header>
+
+  <!-- ================= MENU ================= -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <nav class="menu__links">
+      <a href="index.html" data-i="01">Home</a>
+      <a href="index.html#lavori" data-i="02">Lavori</a>
+      <a href="chi-siamo.html" data-i="03" aria-current="page">Chi siamo</a>
+      <a href="index.html#prezzi" data-i="04">Pacchetti</a>
+      <a href="index.html#contatti" data-i="05">Contatti</a>
+    </nav>
+    <div class="menu__foot mono">
+      <span>studio@sourcelab.it</span>
+      <span>+39 351 911 6103</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ================= APERTURA =================
+         Come la home: etichetta, titolo grande, un solo invito a scorrere.
+         Sfondo: cartina dell'Italia a puntini, interattiva. -->
+    <section class="ab-hero" id="ab-hero" data-theme="dark">
+      <div class="ab-hero__bg" aria-hidden="true"></div>
+      <!-- cartina dell'Italia fatta di puntini (about.js): reagisce al mouse, da Verona partono onde gialle; clic = nuova onda -->
+      <canvas class="ab-mapfx" id="ab-mapfx" aria-hidden="true"></canvas>
+      <div class="ab-hero__bottom" data-scroll="out">
+        <!-- ✏️ titolo della pagina -->
+        <h1 class="ab-hero__title" id="ab-title">Piacere,<br />siamo <em>SOURCE LAB</em>.</h1>
+        <a href="#team" class="hero__scroll hero__scroll--mouse"><span class="mouse-ico" aria-hidden="true"></span><span class="hint-desk">Scorri per esplorare</span><span class="hint-touch">Scorri</span> <span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ================= LO STUDIO =================
+         Come l'introduzione della home: etichetta, una frase, le parole chiave -->
+    <section class="ed ed-intro ab-intro" data-theme="light">
+      <p class="ed-label reveal">Lo studio</p>
+      <!-- ✏️ frase dello studio -->
+      <h2 class="ed-statement" data-scroll="scale">Source Lab è una piccola realtà di <em>Verona</em>.</h2>
+      <ul class="ed-tags reveal"><li>Su misura</li><li>Zero template</li><li>Un referente</li><li>Preventivi chiari</li></ul>
+      <div class="ab-facts" data-scroll="rise">
+        <div class="reveal"><b data-count="3">0</b><small class="mono">Persone</small></div>
+        <div class="reveal"><b data-count="1">0</b><small class="mono">Referente per te</small></div>
+        <div class="reveal"><b data-count="100">0</b><small class="mono">% codice nostro</small></div>
+      </div>
+    </section>
+
+    <!-- ================= LE PERSONE =================
+         ✏️ Cambia foto, nomi, ruoli e descrizioni.
+         Le foto entrano scoprendosi a quadrati viola. -->
+    <section class="ed ab-team" id="team" data-theme="light">
+      <div class="ed-head" data-scroll="left">
+        <div>
+          <p class="ed-label">Le persone</p>
+          <h2>Chi c'è dietro <em>il tuo sito.</em></h2>
+        </div>
+      </div>
+
+      <div class="ab-grid">
+        <article class="ab-person">
+          <div class="ab-person__img">
+            <img src="img/alessandro-card.jpg" alt="Ritratto di Alessandro Leoni" width="480" height="640" loading="lazy" />
+            <canvas class="ab-person__tiles" aria-hidden="true"></canvas>
+          </div>
+          <p class="ab-person__meta mono"><span>01</span><span>Sviluppo web &amp; UI/UX</span></p>
+          <h3 data-scramble>Alessandro Leoni</h3>
+          <p class="ab-person__bio">Disegna il tuo sito e lo costruisce, riga per riga.</p>
+        </article>
+
+        <article class="ab-person">
+          <div class="ab-person__img">
+            <img src="img/ruben-card.jpg?v=2" alt="Ritratto di Ruben Montresor" width="480" height="640" loading="lazy" />
+            <canvas class="ab-person__tiles" aria-hidden="true"></canvas>
+          </div>
+          <p class="ab-person__meta mono"><span>02</span><span>Relazioni con i clienti</span></p>
+          <h3 data-scramble>Ruben Montresor</h3>
+          <p class="ab-person__bio">La persona che ti risponde, prima e dopo il lancio.</p>
+        </article>
+
+        <article class="ab-person">
+          <!-- ✏️ foto in arrivo: quando c'è, metti img/lorenzo-card.jpg (480x640, viso al centro) e sostituisci <span class="ab-person__mono"> con
+               <img src="img/lorenzo-card.jpg" alt="Ritratto di Lorenzo Brutto" width="480" height="640" loading="lazy" /> -->
+          <div class="ab-person__img is-empty">
+            <span class="ab-person__mono" aria-hidden="true">LB</span>
+            <canvas class="ab-person__tiles" aria-hidden="true"></canvas>
+          </div>
+          <p class="ab-person__meta mono"><span>03</span><span>Amministrazione e finanza</span></p>
+          <h3 data-scramble>Lorenzo Brutto</h3>
+          <p class="ab-person__bio">Preventivi chiari, tempi rispettati, zero sorprese.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= FASCIA CINETICA ================= -->
+    <section class="mg-band" data-theme="dark" aria-hidden="true">
+      <div class="mg-band__row" data-dir="1"><span>Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> </span><span>Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> </span><span>Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> Source Lab <i class="star">✳</i> </span></div>
+      <div class="mg-band__row mg-band__row--o" data-dir="-1"><span>Design <i class="star">✳</i> Sviluppo <i class="star">✳</i> Clienti <i class="star">✳</i> Verona <i class="star">✳</i> </span><span>Design <i class="star">✳</i> Sviluppo <i class="star">✳</i> Clienti <i class="star">✳</i> Verona <i class="star">✳</i> </span><span>Design <i class="star">✳</i> Sviluppo <i class="star">✳</i> Clienti <i class="star">✳</i> Verona <i class="star">✳</i> </span></div>
+    </section>
+
+    <!-- ================= INVITO ================= -->
+    <section class="ed ab-cta" data-theme="light">
+      <p class="ed-label">Conosciamoci</p>
+      <h2 data-scroll="scale">Hai un progetto? <em>Parliamone.</em></h2>
+      <div class="ab-cta__row reveal">
+        <a class="ab-btn" href="index.html#contatti">[ Raccontaci il progetto ]</a>
+        <a class="ab-btn ab-btn--line" href="mailto:studio@sourcelab.it">studio@sourcelab.it</a>
+        <a class="ab-btn ab-btn--line" href="tel:+393519116103">+39 351 911 6103</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer ed-footer" data-theme="dark">
+    <div class="ed-footer__top">
+      <div>
+        <p class="ed-label">Pronto a partire?</p>
+        <a class="ed-footer__cta" href="index.html#contatti">Parliamo del tuo progetto <span>→</span></a>
+      </div>
+      <a class="ed-footer__mail" href="mailto:studio@sourcelab.it">studio@sourcelab.it</a>
+    </div>
+    <div class="ed-footer__cols">
+      <div><small>Sito</small><a href="index.html#lavori">Lavori</a><a href="chi-siamo.html">Chi siamo</a><a href="index.html#prezzi">Pacchetti</a><a href="index.html#contatti">Contatti</a></div>
+      <div><small>Studio</small><span>Design e sviluppo web</span><span>Verona,</span><span>anche in videochiamata</span></div>
+      <div><small>Contatti</small><a href="mailto:studio@sourcelab.it">studio@sourcelab.it</a><a href="tel:+393519116103">+39 351 911 6103</a></div>
+      <div class="ed-footer__up"><a href="#top">Torna su ↑</a></div>
+    </div>
+    <div class="ed-footer__mark" aria-hidden="true">SOURCE LAB</div>
+    <div class="footer__row">
+      <span>© <span id="year"></span> Source Lab</span>
+      <span><a href="#">Privacy</a> · <a href="#">Cookie</a></span>
+      <span>Questo sito l'abbiamo fatto noi.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="italy-map.js?v=1"></script>
+  <script src="about.js?v=27"></script>
+  <script src="scroll-hint.js?v=1"></script>
+  <script src="transition.js?v=1"></script>
+</body>
+</html>

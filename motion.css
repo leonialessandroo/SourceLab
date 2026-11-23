@@ -1,0 +1,166 @@
+/* ============================================================
+   SEZIONI "MONOGRID" — animazioni guidate dallo scroll
+   - Manifesto: parole che si accendono + allagamento viola
+   - Cosa facciamo: immagini a pixel che volano (WebGL in motion.js)
+   - Fascia cinetica: testo gigante che scorre e si inclina
+   ============================================================ */
+
+/* sezioni "bloccate": la sezione è alta, il contenuto resta fermo sullo schermo */
+.mg-manifesto { height: 320vh; position: relative; z-index: 2; }
+/* la sezione successiva sale "sotto" il manifesto: è già lì, ferma, quando i quadrati si aprono */
+.mg-services { height: 380vh; position: relative; z-index: 1; margin-top: -200vh; }
+.mg-manifesto .mg-sticky { background: var(--bg); }
+.mg-manifesto.is-open .mg-sticky { background: transparent; }
+.mg-manifesto.is-open .mg-flood { visibility: hidden; }
+.mg-sticky {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0 var(--pad); text-align: center;
+}
+
+/* etichetta mono tra parentesi, con effetto "decodifica" */
+.mg-label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 28px; position: relative; z-index: 2; white-space: pre;
+}
+
+/* ---------- MANIFESTO ---------- */
+.mg-words {
+  position: relative; z-index: 2; max-width: 17ch;
+  font-family: var(--font); font-weight: 300; text-transform: uppercase;
+  font-size: clamp(34px, 5.6vw, 92px); line-height: .98; letter-spacing: -0.035em;
+}
+.mg-words .w { color: #fff; opacity: .13; transition: opacity .25s linear; }
+.mg-flood {
+  position: absolute; inset: 0; z-index: 1; background: var(--primary);
+  clip-path: circle(0% at 50% 58%); will-change: clip-path;
+}
+/* griglia di pixel che "sfuma" il bordo dell'allagamento */
+.mg-flood::after {
+  content: ""; position: absolute; inset: 0; opacity: .18;
+  background-image: radial-gradient(circle, #000 1px, transparent 1.4px); background-size: 6px 6px;
+}
+.mg-meter {
+  position: absolute; z-index: 2; bottom: clamp(28px, 6vh, 64px); left: 50%; translate: -50% 0;
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.6);
+}
+.mg-meter b { font-weight: 400; color: #fff; border: 1px solid rgba(255,255,255,.5); padding: 6px 8px; min-width: 44px; }
+.mg-manifesto.is-flooded .mg-label { color: rgba(255,255,255,.75); }
+
+/* ---------- COSA FACCIAMO ---------- */
+.mg-services .mg-sticky { background: #07060a; }
+.mg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.mg-tiles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.mg-flyers { position: absolute; inset: 0; z-index: 0; }
+.mg-fly {
+  position: absolute; top: 0; left: var(--x); width: var(--w); aspect-ratio: var(--ar);
+  will-change: transform;
+}
+/* senza WebGL le immagini si vedono normalmente, in scala di grigi viola */
+.no-webgl .mg-fly { background: var(--img) center / cover; filter: grayscale(1) contrast(1.2); mix-blend-mode: screen; opacity: .8; }
+.mg-center { position: relative; z-index: 2; pointer-events: none; }
+.mg-list { list-style: none; margin: 0; padding: 0; }
+.mg-list li {
+  font-family: var(--font); font-weight: 300; text-transform: uppercase;
+  font-size: clamp(38px, 6.4vw, 108px); line-height: .96; letter-spacing: -0.04em;
+  color: rgba(255,255,255,.16); transition: color .5s var(--ease), letter-spacing .7s var(--ease);
+}
+.mg-list li.is-on { color: #fff; letter-spacing: -0.02em; }
+.mg-hint {
+  position: absolute; z-index: 2; bottom: 28px; left: 50%; translate: -50% 0;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.45);
+}
+@media (hover: none) { .mg-hint { display: none; } }
+
+/* ---------- FASCIA CINETICA ---------- */
+.mg-band { padding: clamp(60px, 9vw, 130px) 0; overflow: hidden; background: #07060a; }
+.mg-band__row {
+  display: flex; white-space: nowrap; will-change: transform;
+  font-family: var(--font); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(64px, 13vw, 230px); line-height: .9; letter-spacing: -0.05em; color: #fff;
+}
+.mg-band__row span { padding-right: .25em; }
+.mg-band__row--o { color: transparent; -webkit-text-stroke: 1.5px var(--primary); }
+
+/* ---------- SECONDA SEZIONE (intro + showreel) nello stile del concept ---------- */
+/* cursore a blocco viola che lampeggia alla fine della frase */
+.ed-intro .ed-statement::after {
+  content: ""; display: inline-block; width: .42em; height: .78em; margin-left: .1em;
+  background: var(--primary); vertical-align: -0.04em; animation: mg-blink 1.05s steps(1) infinite;
+}
+@keyframes mg-blink { 50% { opacity: 0; } }
+/* etichette mono tra parentesi quadre */
+.ed-intro .ed-label { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.ed-intro .ed-label::before { content: "[ "; } .ed-intro .ed-label::after { content: " ]"; }
+.ed-tags { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; gap: 10px; }
+.ed-tags li::before, .ed-tags li::after { content: none; }
+.ed-tags li { border: 1px solid var(--line); padding: 8px 12px; transition: background .35s var(--ease), color .35s, border-color .35s; }
+.ed-tags li:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+/* quadrati sopra le immagini */
+.reel-tiles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.reelshow.has-tiles figure { transition: opacity 0s, transform 4.5s var(--ease); }
+.reelshow__tag { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; max-width: calc(100% - 140px); text-align: left; line-height: 1.5; }
+.reelshow__play {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; white-space: pre;
+  background: #c6ff3d; color: #0d0b09; border-radius: 0; padding: 12px 16px;
+}
+/* il bottone segue il mouse */
+.reelshow.is-follow .reelshow__play { left: var(--cx); top: var(--cy); bottom: auto; transform: translate(-50%, -50%); }
+.reelshow.is-follow:hover .reelshow__play { transform: translate(-50%, -50%) scale(1.06); }
+.reelshow.is-follow { cursor: none; }
+.reelshow__note { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .mg-words { max-width: 12ch; }
+  .mg-fly { width: calc(var(--w) * 2.1); }
+}
+
+/* ---------- Movimento ridotto: tutto statico ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .mg-manifesto, .mg-services { height: auto; margin-top: 0; }
+  .mg-sticky { position: relative; height: auto; min-height: 100vh; padding: 120px var(--pad); }
+  .mg-words .w { opacity: 1; }
+  .mg-list li { color: #fff; }
+  .mg-tiles, .reel-tiles { display: none; }
+  .ed-intro .ed-statement::after { animation: none; }
+}
+
+/* ---------- Cambio pagina a quadrati (transition.js) ---------- */
+.pt { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 300; pointer-events: none; }
+/* finché transition.js non parte, lo schermo resta viola (niente lampo della pagina) */
+html.pt-in body::after { content: ""; position: fixed; inset: 0; z-index: 299; background: #7b2cff; }
+
+/* ---------- Invito a scorrere: mouse con la rotellina che si muove ---------- */
+.mouse-ico {
+  position: relative; display: inline-block; flex: none; width: 18px; height: 28px;
+  border: 1.5px solid currentColor; border-radius: 10px;
+}
+.mouse-ico::after {
+  content: ""; position: absolute; left: 50%; top: 5px; width: 3px; height: 6px; margin-left: -1.5px;
+  border-radius: 2px; background: #c6ff3d; animation: mouse-wheel 1.8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes mouse-wheel { 0% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(9px); opacity: 0; } 61% { transform: translateY(0); opacity: 0; } 100% { opacity: 1; } }
+.hero__scroll--mouse { gap: 12px; align-items: center; }
+.hero__scroll--mouse .arrow, .hero__scroll--mouse .hint-touch { display: none; }
+/* sul telefono niente mouse: "Scorri ↓" */
+@media (hover: none) {
+  .hero__scroll--mouse .mouse-ico, .hero__scroll--mouse .hint-desk { display: none; }
+  .hero__scroll--mouse .arrow, .hero__scroll--mouse .hint-touch { display: inline; }
+}
+
+/* promemoria che compare se ti fermi a metà pagina */
+.scroll-hint {
+  position: fixed; z-index: 45; right: var(--pad); bottom: 22px;
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 12px; border-radius: 99px;
+  background: rgba(10,10,12,.62); color: #fff; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  opacity: 0; transform: translateY(14px); pointer-events: none;
+  transition: opacity .5s var(--ease), transform .7s var(--ease);
+}
+.scroll-hint.is-on { opacity: 1; transform: none; }
+.scroll-hint .mouse-ico { width: 14px; height: 22px; border-radius: 8px; }
+.scroll-hint .mouse-ico::after { top: 4px; height: 5px; }
+@media (hover: none) { .scroll-hint .mouse-ico { display: none; } .scroll-hint::before { content: "↓"; color: #c6ff3d; } }
+@media (prefers-reduced-motion: reduce) { .mouse-ico::after { animation: none; } }

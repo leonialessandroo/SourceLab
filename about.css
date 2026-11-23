@@ -1,0 +1,176 @@
+/* ============================================================
+   PAGINA "CHI SIAMO" — editoriale e semplice,
+   con le stesse animazioni della home (pixel viola, decodifica, parole che salgono)
+   ============================================================ */
+
+/* ---------- Apertura: foto di sfondo + titolo con le parole che salgono ---------- */
+.ab-hero {
+  position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden;
+  padding: 140px var(--pad) var(--pad); background: #07060a; color: #fff;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.ab-hero > *:not(.ab-hero__bg) { position: relative; z-index: 1; }
+/* foto di sfondo: entra una sola volta all'apertura (zoom leggero), poi resta ferma */
+.ab-hero__bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--bg-img) center 40% / cover no-repeat;
+  opacity: 0; transform: scale(1.08);
+  transition: opacity 1.6s var(--ease), transform 2.4s var(--ease);
+}
+.ab-hero.is-in .ab-hero__bg { opacity: 1; transform: none; }
+/* velo scuro (più scuro in basso, dove c'è il testo) + un alone viola appena accennato */
+.ab-hero__bg::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(70% 60% at 85% 15%, rgba(123,44,255,.22), transparent 70%),
+    linear-gradient(180deg, rgba(7,6,10,.55) 0%, rgba(7,6,10,.62) 45%, rgba(7,6,10,.94) 100%);
+}
+/* grana leggera, come una foto stampata */
+.ab-hero__bg::after {
+  content: ""; position: absolute; inset: 0; opacity: .18; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* titolo: stesso carattere, misura e giallo del titolo della home */
+.ab-hero__bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.ab-hero__title {
+  font-size: clamp(28px, 4.3vw, 84px); font-weight: 300; line-height: 1.04; letter-spacing: -0.04em;
+  max-width: 34ch; position: relative; z-index: 2;
+}
+.ab-hero__title em { font-style: normal; color: #c6ff3d; }
+
+/* sfondo: cartina dell'Italia a puntini disegnata su canvas (about.js) */
+.ab-hero > .ab-mapfx {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  opacity: 0; transition: opacity 1.6s var(--ease) .3s;
+}
+.ab-hero.is-in > .ab-mapfx { opacity: 1; }
+.ab-hero__bottom { pointer-events: none; }
+.ab-hero__bottom .hero__scroll { pointer-events: auto; }
+/* parole che salgono all'apertura */
+.ab-hero__title .ab-wm { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.ab-hero__title .ab-tw { display: inline-block; transform: translateY(108%); transition: transform 1.3s var(--ease); transition-delay: var(--d, 0ms); }
+.ab-hero.is-in .ab-tw { transform: none; }
+
+/* ---------- Lo studio (come l'introduzione della home) ---------- */
+.ab-intro .ed-statement { max-width: 14ch; }
+.ab-facts {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left;
+  max-width: 1040px; margin: clamp(56px, 7vw, 110px) auto 0;
+}
+.ab-facts div { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 10px; }
+.ab-facts b { font-size: clamp(56px, 7vw, 120px); font-weight: 400; letter-spacing: -.06em; line-height: .9; }
+.ab-facts div:nth-child(3) b::after { content: "%"; }
+.ab-facts small { color: var(--muted); }
+
+/* ---------- Le persone: ritratti rettangolari, viso al centro ---------- */
+.ab-team .ed-head { align-items: flex-end; }
+.ab-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 5vw, 80px);
+  align-items: start; max-width: 1040px; margin-inline: auto;
+}
+/* ✏️ grandezza dei ritratti: 240 px è esattamente metà del file (480 px), così restano nitidi */
+.ab-person__img {
+  position: relative; width: 240px; max-width: 100%; aspect-ratio: 3 / 4;
+  overflow: hidden; isolation: isolate; background: #1b1814;
+  box-shadow: 0 0 0 0 var(--primary);
+  transition: box-shadow .5s var(--ease);
+}
+/* le foto sono già in bianco e nero e già della misura giusta: nessun filtro, nessun movimento */
+.ab-person__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ab-person__tiles { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+/* al passaggio del mouse: una cornice viola attorno al ritratto */
+.ab-person:hover .ab-person__img { box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--primary); }
+
+.ab-person__meta {
+  display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--line); color: var(--muted);
+}
+.ab-person h3 { margin-top: 14px; font-weight: 400; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.035em; line-height: 1.1; white-space: pre; }
+.ab-person__bio { margin-top: 12px; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: 34ch; }
+
+/* persona senza foto: monogramma nel riquadro */
+.ab-person__img.is-empty { background: #0d0b09; display: grid; place-items: center; }
+.ab-person__mono {
+  font-weight: 800; font-size: 84px; letter-spacing: -.07em; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.2px var(--primary); transition: color .5s var(--ease);
+}
+.ab-person:hover .ab-person__mono { color: var(--primary); }
+
+/* ---------- Invito ---------- */
+.ab-cta { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.ab-cta h2 { margin: 0 auto; max-width: 13ch; font-size: clamp(44px, 7vw, 116px); }
+.ab-cta__row { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 44px; }
+.ab-btn {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 16px 20px; background: #c6ff3d; color: #0d0b09; border: 1px solid transparent;
+  transition: background .35s var(--ease), color .35s, border-color .35s;
+}
+.ab-btn:hover { background: var(--primary); color: #fff; }
+.ab-btn--line { background: transparent; color: var(--fg); border-color: var(--line); text-transform: none; }
+.ab-btn--line:hover { border-color: var(--primary); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .ab-grid { grid-template-columns: 1fr; gap: 56px; max-width: 360px; }
+  .ab-hero__bottom { flex-direction: column; align-items: stretch; gap: 28px; }
+  .ab-hero__bottom .hero__scroll { align-self: flex-end; }
+}
+@media (max-width: 560px) {
+  .ab-facts { grid-template-columns: 1fr; }
+  .ab-facts b { font-size: 64px; }
+}
+
+/* ---------- Movimento ridotto ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ab-person__tiles { display: none; }
+  .ab-hero__title .ab-tw { transform: none; transition: none; }
+  .ab-hero__bg { opacity: 1; transform: none; transition: none; }
+  .ab-hero > .ab-mapfx { opacity: 1; transition: none; }
+}
+
+/* ============================================================
+   ANIMAZIONI IN PIÙ (pagina Chi siamo)
+   ============================================================ */
+@keyframes ab-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes ab-spin { to { transform: rotate(360deg); } }
+
+/* fascia che scorre: gli asterischi girano */
+.mg-band .star { display: inline-block; font-style: normal; color: #c6ff3d; -webkit-text-stroke: 0; animation: ab-spin 6s linear infinite; }
+.mg-band__row--o .star { color: var(--primary); }
+
+/* parole chiave dello studio: entrano una dopo l'altra */
+.ab-intro .ed-tags li { opacity: 0; }
+.ab-intro .ed-tags.is-in li { animation: ab-up .8s var(--ease) both; }
+.ab-intro .ed-tags.is-in li:nth-child(2) { animation-delay: .09s; }
+.ab-intro .ed-tags.is-in li:nth-child(3) { animation-delay: .18s; }
+.ab-intro .ed-tags.is-in li:nth-child(4) { animation-delay: .27s; }
+
+/* numeri: la linea sopra si disegna da sinistra */
+.ab-facts div { border-top: 0; position: relative; }
+.ab-facts div::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line);
+  transform: scaleX(0); transform-origin: left; transition: transform 1.4s var(--ease) .2s;
+}
+.ab-facts div.is-in::before { transform: none; }
+
+/* persone: ruolo, linea, nome e descrizione entrano in sequenza dopo la foto */
+.ab-person__meta { border-bottom: 0; position: relative; }
+.ab-person__meta::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line);
+  transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease);
+  transition-delay: calc(var(--p, 0) * 160ms + .5s);
+}
+.ab-person.is-in .ab-person__meta::after { transform: none; }
+.ab-person__meta, .ab-person h3, .ab-person__bio { opacity: 0; }
+.ab-person.is-in .ab-person__meta { animation: ab-up .9s var(--ease) both; animation-delay: calc(var(--p, 0) * 160ms + .4s); }
+.ab-person.is-in h3 { animation: ab-up .9s var(--ease) both; animation-delay: calc(var(--p, 0) * 160ms + .55s); }
+.ab-person.is-in .ab-person__bio { animation: ab-up .9s var(--ease) both; animation-delay: calc(var(--p, 0) * 160ms + .7s); }
+
+/* bottoni finali: si lasciano "attirare" dal mouse */
+.ab-cta .ab-btn { transition: background .35s var(--ease), color .35s, border-color .35s, transform .5s var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-band .star { animation: none; }
+  .ab-intro .ed-tags li, .ab-person__meta, .ab-person h3, .ab-person__bio { opacity: 1; animation: none !important; }
+  .ab-facts div::before, .ab-person__meta::after { transform: none; }
+}

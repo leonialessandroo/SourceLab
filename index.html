@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ✏️ Cambia titolo e descrizione -->
+  <title>SOURCE LAB — Siti web su misura</title>
+  <meta name="description" content="SOURCE LAB è uno studio digitale che progetta e sviluppa siti web, e-commerce e landing page su misura." />
+  <!-- se arrivi da un'altra pagina del sito, lo schermo parte coperto dai quadrati viola -->
+  <script>try { if (sessionStorage.getItem("sl-pt")) document.documentElement.classList.add("pt-in"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;800;900&family=Geist+Mono:wght@300;400&family=Fraunces:opsz,wght@9..144,300..700&family=Work+Sans:wght@300..600&family=Libre+Caslon+Display&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="concepts.css?v=8" />
+  <link rel="stylesheet" href="editorial.css?v=13" />
+  <link rel="stylesheet" href="motion.css?v=10" />
+</head>
+<body>
+
+
+  <!-- ================= INTRO / LOADER ================= -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <canvas id="loader-canvas"></canvas>
+    <div class="loader__ui">
+      <span class="loader__corner tl mono">Source Lab®</span>
+      <span class="loader__corner tr mono">Studio digitale</span>
+      <div class="loader__center">
+        <div class="loader__mark" id="loader-mark"></div>
+        <div class="loader__name">SOURCE LAB</div>
+        <div class="loader__sub mono">( design &amp; sviluppo web )</div>
+      </div>
+      <span class="loader__corner bl mono">Caricamento</span>
+      <span class="loader__corner br mono"><span id="loader-num">000</span></span>
+    </div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="header">
+    <a href="#contatti" class="pill pill--ghost"><span class="dot"></span>Contattaci</a>
+    <a href="#top" class="logo" aria-label="Home">SOURCE LAB</a>
+    <nav class="header__right">
+      <a href="chi-siamo.html" class="pill hide-sm">Chi siamo</a>
+      <a href="#lavori" class="pill hide-sm">Lavori</a>
+      <button class="pill" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    </nav>
+  </header>
+
+  <!-- ================= MENU OVERLAY ================= -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <nav class="menu__links">
+      <a href="#top" data-i="01">Home</a>
+      <a href="#lavori" data-i="02">Lavori</a>
+      <a href="chi-siamo.html" data-i="03">Chi siamo</a>
+      <a href="#prezzi" data-i="04">Pacchetti</a>
+      <a href="#contatti" data-i="05">Contatti</a>
+    </nav>
+    <div class="menu__foot mono">
+      <span>studio@sourcelab.it</span>
+      <span>+39 351 911 6103</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" data-theme="dark">
+      <!-- Logo grande "liquido": passa il mouse sopra per muovere l'acqua.
+           ✏️ Le parole e le composizioni si cambiano in script.js (LIQUID_LAYOUTS) -->
+      <canvas id="liquid" aria-hidden="true"></canvas>
+      <div class="hero__bottom">
+      <h1 class="hero__title" id="hero-title">
+        SOURCE LAB progetta e sviluppa siti web su misura che fanno crescere il tuo business.
+      </h1>
+        <a href="#lavori" class="hero__scroll hero__scroll--mouse"><span class="mouse-ico" aria-hidden="true"></span><span class="hint-desk">Scorri per esplorare</span><span class="hint-touch">Scorri</span> <span class="arrow">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INTRO — la pagina si "apre" sulla carta
+         ============================================================ -->
+    <section class="ed ed-intro" id="lavori" data-theme="light">
+      <p class="ed-label reveal">Studio di design e sviluppo web</p>
+      <h2 class="ed-statement">Siti su misura per chi vuole <em>distinguersi</em>.</h2>
+      <ul class="ed-tags reveal"><li>Design</li><li>Sviluppo</li><li>E-commerce</li><li>SEO</li><li>Manutenzione</li></ul>
+      <!-- Riquadro "showreel": cresce mentre scorri e mostra a rotazione i nostri concept -->
+      <div class="ed-reel" id="reel">
+        <div class="ed-reel__inner reelshow" role="button" tabindex="0" aria-label="Apri il concept">
+          <figure class="is-on" data-concept="0" style="--img:url('https://images.unsplash.com/photo-1689781307118-030db9290d38?auto=format&fit=crop&w=1600&q=75')"><b class="shelf__logo shelf__logo--brace">brace</b></figure>
+          <figure class="is-bw" data-concept="1" style="--img:url('https://images.unsplash.com/photo-1761381520581-e2ac300b829d?auto=format&fit=crop&w=1600&q=75')"><b class="shelf__logo shelf__logo--ferri">Ferri &amp; Associati</b></figure>
+          <figure data-concept="2" style="--img:url('https://images.unsplash.com/photo-1571513800374-df1bbe650e56?auto=format&fit=crop&w=1600&q=75')"><b class="shelf__logo shelf__logo--norda">NORDA</b></figure>
+          <figure class="reelshow__end"><b>Il prossimo<br /><em>potrebbe essere il tuo.</em></b></figure>
+          <!-- quadrati che coprono e scoprono le immagini (motion.js) -->
+          <canvas class="reel-tiles" id="reel-tiles" aria-hidden="true"></canvas>
+          <span class="reelshow__tag" id="reel-tag">Concept · Brace — Ristorante</span>
+          <span class="reelshow__play" id="reel-play">[ Apri il concept ]</span>
+          <span class="reelshow__dots"><i class="is-on"></i><i></i><i></i><i></i></span>
+        </div>
+        <p class="reelshow__note">Concept dimostrativi · Clicca per vederli nel dettaglio</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MANIFESTO — la frase si "accende" parola per parola mentre scorri,
+         poi lo schermo si allaga di viola (ispirato a Monogrid)
+         ✏️ Modifica qui la frase
+         ============================================================ -->
+    <section class="mg-manifesto" id="manifesto" data-theme="dark">
+      <div class="mg-sticky">
+        <div class="mg-flood" aria-hidden="true"></div>
+        <!-- transizione a quadrati: il viola si rompe in blocchi e sotto appare la sezione successiva -->
+        <canvas class="mg-tiles" id="mg-tiles" aria-hidden="true"></canvas>
+        <p class="mg-label" data-scramble>[ Il nostro approccio ]</p>
+        <h2 class="mg-words" id="mg-words">Progettiamo e scriviamo ogni sito da zero, senza template, perché il tuo business merita di essere ricordato.</h2>
+        <div class="mg-meter" aria-hidden="true"><span>Scorri</span><b id="mg-count">000</b><span>Scopri</span></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COSA FACCIAMO — lista al centro, immagini che volano verso l'alto.
+         Le immagini sono "a pixel" viola; passandoci sopra col mouse
+         si rivelano a colori e si deformano (WebGL, file motion.js)
+         ✏️ Modifica qui servizi e immagini (data-src)
+         ============================================================ -->
+    <section class="mg-services" id="servizi" data-theme="dark">
+      <div class="mg-sticky">
+        <canvas class="mg-canvas" id="mg-canvas" aria-hidden="true"></canvas>
+        <div class="mg-flyers" id="mg-flyers" aria-hidden="true">
+          <div class="mg-fly" style="--x:6%;--w:13vw;--ar:.75" data-speed="1.15" data-offset="0.00" data-src="https://images.unsplash.com/photo-1643139863038-7355941e9e89?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:74%;--w:17vw;--ar:.8" data-speed="0.95" data-offset="0.12" data-src="https://images.unsplash.com/photo-1677111105589-18eb5ca22aba?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:24%;--w:11vw;--ar:1" data-speed="1.35" data-offset="0.28" data-src="https://images.unsplash.com/photo-1653481351422-91ceed9c94bd?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:58%;--w:12vw;--ar:.7" data-speed="1.1" data-offset="0.40" data-src="https://images.unsplash.com/photo-1560253740-f0e82b766d72?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:86%;--w:10vw;--ar:.75" data-speed="1.25" data-offset="0.55" data-src="https://images.unsplash.com/photo-1671869203911-cdaab14b9811?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:3%;--w:16vw;--ar:1.25" data-speed="0.9" data-offset="0.62" data-src="https://images.unsplash.com/photo-1551902675-a415b7df1ba1?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:40%;--w:13vw;--ar:.75" data-speed="1.2" data-offset="0.78" data-src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:68%;--w:14vw;--ar:.8" data-speed="1.0" data-offset="0.90" data-src="https://images.unsplash.com/photo-1676731820551-4b2988ae4e29?auto=format&fit=crop&w=700&q=70"></div>
+          <div class="mg-fly" style="--x:14%;--w:12vw;--ar:.6" data-speed="1.3" data-offset="1.02" data-src="https://images.unsplash.com/photo-1653549892798-c8596ad08ee6?auto=format&fit=crop&w=700&q=70"></div>
+        </div>
+        <div class="mg-center">
+          <p class="mg-label" data-scramble>[ Cosa facciamo ]</p>
+          <ul class="mg-list" id="mg-list">
+            <li class="is-on">Siti web</li>
+            <li>E-commerce</li>
+            <li>Landing page</li>
+            <li>Identità visiva</li>
+            <li>SEO e velocità</li>
+          </ul>
+        </div>
+        <p class="mg-hint" aria-hidden="true">Passa il mouse sulle immagini</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FASCIA CINETICA — due righe giganti che scorrono in direzioni
+         opposte e si inclinano con la velocità dello scroll
+         ============================================================ -->
+    <section class="mg-band" data-theme="dark" aria-hidden="true">
+      <div class="mg-band__row" data-dir="1"><span>Source Lab ✳ Source Lab ✳ Source Lab ✳ </span><span>Source Lab ✳ Source Lab ✳ Source Lab ✳ </span><span>Source Lab ✳ Source Lab ✳ Source Lab ✳ </span></div>
+      <div class="mg-band__row mg-band__row--o" data-dir="-1"><span>Siti su misura ✳ Design ✳ Sviluppo ✳ E-commerce ✳ </span><span>Siti su misura ✳ Design ✳ Sviluppo ✳ E-commerce ✳ </span><span>Siti su misura ✳ Design ✳ Sviluppo ✳ E-commerce ✳ </span></div>
+    </section>
+
+    <!-- ============================================================
+         PACCHETTI — lista editoriale che si apre al passaggio del mouse
+         ✏️ Modifica qui nomi e caratteristiche (i prezzi si danno su preventivo)
+         ============================================================ -->
+    <section class="ed ed-packs" id="prezzi" data-theme="light">
+      <div class="ed-head">
+        <div><p class="ed-label">Pacchetti</p><h2>Tre modi per <em>partire</em>.</h2></div>
+        <a href="#contatti" class="ed-btn">Chiedi un preventivo</a>
+      </div>
+      <ul class="packs">
+        <li class="pack reveal">
+          <button class="pack__row"><span class="pack__name">Landing Page</span><span class="pack__line">Una pagina, un obiettivo.</span><span class="pack__price">Su preventivo</span><i>+</i></button>
+          <div class="pack__more"><div><ul><li>1 pagina su misura</li><li>Modulo contatti</li><li>Online in circa 2 settimane</li></ul><a href="#contatti" data-choose="Landing Page">Chiedi un preventivo →</a></div></div>
+        </li>
+        <li class="pack reveal">
+          <button class="pack__row"><span class="pack__name">Sito Aziendale</span><span class="pack__line">Presentare la tua attività, bene.</span><span class="pack__price">Su preventivo</span><i>+</i></button>
+          <div class="pack__more"><div><ul><li>Fino a 6 pagine</li><li>Blog gestibile da te</li><li>Online in circa 4 settimane</li></ul><a href="#contatti" data-choose="Sito Aziendale">Chiedi un preventivo →</a></div></div>
+        </li>
+        <li class="pack reveal">
+          <button class="pack__row"><span class="pack__name">E-commerce</span><span class="pack__line">Vendere online, dal primo giorno.</span><span class="pack__price">Su preventivo</span><i>+</i></button>
+          <div class="pack__more"><div><ul><li>Catalogo e pagamenti</li><li>Ordini e spedizioni</li><li>Online in circa 6 settimane</li></ul><a href="#contatti" data-choose="E-commerce">Chiedi un preventivo →</a></div></div>
+        </li>
+        <li class="pack reveal">
+          <button class="pack__row"><span class="pack__name">Manutenzione</span><span class="pack__line">Hosting, aggiornamenti, assistenza.</span><span class="pack__price">Su preventivo</span><i>+</i></button>
+          <div class="pack__more"><div><ul><li>Hosting e dominio</li><li>Backup e sicurezza</li><li>Assistenza diretta</li></ul><a href="#contatti" data-choose="Non lo so ancora">Chiedi un preventivo →</a></div></div>
+        </li>
+      </ul>
+      <p class="ed-note ed-note--quote">Ogni progetto è diverso. <a href="#contatti">Scrivici per un primo preventivo →</a></p>
+    </section>
+
+    <!-- ============================================================
+         CONTATTI
+         ============================================================ -->
+    <section class="ed ed-contact" id="contatti" data-theme="light">
+      <div class="contact__grid">
+        <div class="contact__left">
+          <p class="ed-label">Contatti</p>
+          <h2 class="contact__title">Hai un progetto?<br /><em>Parliamone.</em></h2>
+          <a class="contact__mail" href="mailto:studio@sourcelab.it">studio@sourcelab.it</a>
+          <div class="faq">
+            <details><summary>Quanto tempo serve?<span>+</span></summary><p>Da 2 a 6 settimane, in base al pacchetto.</p></details>
+            <details><summary>Potrò modificarlo da solo?<span>+</span></summary><p>Sì, con un pannello semplice. Ti mostriamo come usarlo.</p></details>
+            <details><summary>Come si paga?<span>+</span></summary><p>50% all'avvio e 50% alla pubblicazione.</p></details>
+          </div>
+        </div>
+        <form class="form" id="contact-form">
+          <fieldset class="choices">
+            <legend>Di cosa hai bisogno?</legend>
+            <label><input type="radio" name="servizio" value="Landing Page" /><span>Landing Page</span></label>
+            <label><input type="radio" name="servizio" value="Sito Aziendale" checked /><span>Sito Aziendale</span></label>
+            <label><input type="radio" name="servizio" value="E-commerce" /><span>E-commerce</span></label>
+            <label><input type="radio" name="servizio" value="Non lo so ancora" /><span>Non lo so ancora</span></label>
+          </fieldset>
+          <label>Nome<input type="text" name="nome" required placeholder="Mario Rossi" /></label>
+          <label>Email<input type="email" name="email" required placeholder="mario@azienda.it" /></label>
+          <label>Due righe sul progetto<textarea name="messaggio" rows="3" placeholder="Facoltativo"></textarea></label>
+          <button type="submit" class="ed-btn ed-btn--big">Prenota la call gratuita</button>
+          <p class="form__status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer ed-footer" data-theme="dark">
+    <div class="ed-footer__top">
+      <div>
+        <p class="ed-label">Pronto a partire?</p>
+        <a class="ed-footer__cta" href="#contatti">Parliamo del tuo progetto <span>→</span></a>
+      </div>
+      <a class="ed-footer__mail" href="mailto:studio@sourcelab.it">studio@sourcelab.it</a>
+    </div>
+    <div class="ed-footer__cols">
+      <div><small>Sito</small><a href="#lavori">Lavori</a><a href="chi-siamo.html">Chi siamo</a><a href="#prezzi">Pacchetti</a><a href="#contatti">Contatti</a></div>
+      <div><small>Studio</small><span>Design e sviluppo web</span><span>Su appuntamento,</span><span>anche in videochiamata</span></div>
+      <div><small>Contatti</small><a href="mailto:studio@sourcelab.it">studio@sourcelab.it</a><a href="tel:+393519116103">+39 351 911 6103</a></div>
+      <div class="ed-footer__up"><a href="#top">Torna su ↑</a></div>
+    </div>
+    <div class="ed-footer__mark" aria-hidden="true">SOURCE LAB</div>
+    <div class="footer__row">
+      <span>© <span id="year"></span> Source Lab</span>
+      <span><a href="#">Privacy</a> · <a href="#">Cookie</a></span>
+      <span>Questo sito l'abbiamo fatto noi.</span>
+    </div>
+  </footer>
+
+
+  <!-- ================= CONCEPT APERTO A SCHERMO INTERO ================= -->
+  <div class="cmodal" id="cmodal" aria-hidden="true" data-lenis-prevent>
+    <div class="cmodal__bar">
+      <span class="cmodal__title" id="cmodal-title"></span>
+      <div class="cmodal__nav"><button data-step="-1" aria-label="Concept precedente">←</button><button data-step="1" aria-label="Concept successivo">→</button><button class="cmodal__close" aria-label="Chiudi">Chiudi ✕</button></div>
+    </div>
+    <div class="cmodal__body">
+        <div class="showcase__slides">
+          <!-- ================= CONCEPT 1 — BRACE (ristorante) =================
+               Riferimento: siti di ristoranti come Noma e Dishoom.
+               Sobrio, tipografico, foto grandi, una storia vera. -->
+          <article class="slide case case--brace" data-slide="0">
+            <header class="case__cover">
+              <div class="case__coverTop"><span>Concept 01 — Ristorante</span><span>Source Lab · Caso studio</span></div>
+              <h2 class="case__logo">brace</h2>
+              <div class="case__coverBottom"><p class="case__lead">Un sito per un'osteria di famiglia che vuole riempire i tavoli: foto grandi, poche parole e un solo invito a prenotare.</p><dl class="case__meta"><div><dt>Cliente</dt><dd>Osteria di famiglia</dd></div><div><dt>Pacchetto</dt><dd>Landing Page</dd></div><div><dt>Tempi</dt><dd>Circa 2 settimane</dd></div><div><dt>Servizi</dt><dd>Design, sviluppo, SEO</dd></div></dl></div>
+            </header>
+            <div class="case__hero">
+              <div class="browser">
+                <div class="browser__bar"><i></i><i></i><i></i><span>brace — concept</span></div>
+                <div class="browser__screen"><div class="page c1">
+                  <header class="c1__hero" style="--img:url('https://images.unsplash.com/photo-1689781307118-030db9290d38?auto=format&fit=crop&w=1600&q=75')">
+                    <nav><b class="c1__mark">brace</b><span>Menu&ensp;&ensp;La cucina&ensp;&ensp;Eventi&ensp;&ensp;Regali</span><span>Prenotazioni&ensp;&ensp;IT / EN</span></nav>
+                    <div class="c1__heroText"><h4>Cucina di famiglia</h4><span class="c1__book">Prenota un tavolo <i>→</i></span></div>
+                  </header>
+                  <section class="c1__news"><span>Serate al camino, menu di stagione e qualche segreto della cucina.</span><span class="c1__field">Email</span><span class="c1__field">Nome</span><b>Iscriviti</b></section>
+                  <section class="c1__story">
+                    <small>La cucina</small>
+                    <p>Cuciniamo su brace di quercia, come faceva il nonno. Pochi piatti, scelti ogni mattina al mercato, e una piccola cantina di vini del territorio.</p>
+                    <figure style="--img:url('https://images.unsplash.com/photo-1670819916552-67698b1c86ae?auto=format&fit=crop&w=700&q=75')"><figcaption>Il nonno alla brace, dall'archivio di famiglia</figcaption></figure>
+                  </section>
+                  <section class="c1__menu">
+                    <small>Menu d'autunno · Novembre 2026</small>
+                    <h5>Antipasti</h5>
+                    <p>Crescentine, squacquerone e mortadella <b>12</b></p>
+                    <p>Cardi gratinati al Parmigiano 30 mesi <b>11</b></p>
+                    <h5>Primi</h5>
+                    <p>Tagliatelle al ragù bianco, tirate a mano <b>16</b></p>
+                    <p>Tortellini in brodo di cappone <b>18</b></p>
+                    <h5>Dalla brace</h5>
+                    <p>Costata di manzo, al kg <b>64</b></p>
+                    <p>Galletto, salsa verde e patate sotto la cenere <b>24</b></p>
+                    <span class="c1__menuNote">Coperto 3 · Il menu cambia con il mercato</span>
+                  </section>
+                  <section class="c1__pair">
+                    <i style="--img:url('https://images.unsplash.com/photo-1463569643904-4fbae71ed917?auto=format&fit=crop&w=800&q=75')"></i>
+                    <i style="--img:url('https://images.unsplash.com/photo-1625944525803-d510d5a4a262?auto=format&fit=crop&w=600&q=75')"></i>
+                  </section>
+                  <footer>
+                    <div><small>Dove</small>Nel centro storico<br />Indirizzo di esempio</div>
+                    <div><small>Quando</small>Mar–Sab 19.00–23.00<br />Domenica anche a pranzo</div>
+                    <div><small>Contatti</small>Prenota online<br />o chiamaci</div>
+                    <b class="c1__mark c1__mark--big">brace</b>
+                  </footer>
+                </div></div>
+              </div>
+            </div>
+            <div class="case__text">
+              <div><span class="case__num">01</span><h3>La sfida</h3><p>Trent'anni di storia e clienti affezionati, ma le prenotazioni arrivavano solo al telefono e il sito era fermo a dieci anni fa.</p></div>
+              <div><span class="case__num">02</span><h3>La soluzione</h3><p>Una pagina sola, costruita come una carta stampata: il menu della settimana, la storia della famiglia e un invito a prenotare sempre a portata di mano.</p></div>
+              <div><span class="case__num">03</span><h3>Il risultato</h3><p>Prenotare un tavolo richiede due tocchi, anche dal telefono. Il menu si aggiorna in un minuto, senza chiamare nessuno.</p></div>
+            </div>
+            <div class="case__duo">
+              <div class="case__phone"><div class="phone"><div class="phone__screen"><div class="page m1">
+                <header style="--img:url('https://images.unsplash.com/photo-1689781307118-030db9290d38?auto=format&fit=crop&w=700&q=75')">
+                  <nav><b class="c1__mark">brace</b><span>Menu</span></nav>
+                  <div><h4>Cucina di famiglia</h4><span class="c1__book">Prenota un tavolo <i>→</i></span></div>
+                </header>
+                <section class="m1__story"><small>La cucina</small><p>Cuciniamo su brace di quercia, come faceva il nonno.</p></section>
+                <div class="m1__img" style="--img:url('https://images.unsplash.com/photo-1670819916552-67698b1c86ae?auto=format&fit=crop&w=500&q=75')"></div>
+                <section class="m1__menu"><small>Menu d'autunno</small><p>Tagliatelle al ragù bianco <b>16</b></p><p>Tortellini in brodo <b>18</b></p><p>Costata, al kg <b>64</b></p></section>
+                <footer>Aperti dal martedì alla domenica<br />Prenota online</footer>
+              </div></div></div></div>
+              <figure class="case__img" style="--img:url('https://images.unsplash.com/photo-1625944525803-d510d5a4a262?auto=format&fit=crop&w=1200&q=75')"></figure>
+            </div>
+            <section class="case__identity">
+              <div class="case__secHead"><span class="case__num">04</span><h3>Identità</h3><p>Logo, caratteri, colori ed elementi dell'interfaccia: un sistema coerente, pensato solo per questo cliente.</p></div>
+              <div class="case__idGrid">
+                <div class="case__idLogo"><b class="case__logo case__logo--sm">brace</b><small>Logotipo</small></div>
+                <div class="case__idType">
+                  <div class="case__spec case__spec--head"><span class="case__aa">Aa</span><div><b>Fraunces</b><p>Serif morbido e caldo, come un'insegna dipinta a mano.</p><span class="case__abc">ABCDEFGHIJKLM abcdefghijklm 0123456789</span></div></div>
+                  <div class="case__spec case__spec--body"><span class="case__aa">Aa</span><div><b>Work Sans</b><p>Pulito e leggibile per menu, orari e prezzi.</p></div></div>
+                </div>
+                <div class="case__idColors"><div class="case__swatch" style="--sw:#f1ece2;--tx:#17130f"><span>Carta</span><code>#f1ece2</code></div><div class="case__swatch" style="--sw:#2f3b2b;--tx:#fafaf8"><span>Bosco</span><code>#2f3b2b</code></div><div class="case__swatch" style="--sw:#8f3f22;--tx:#fafaf8"><span>Brace</span><code>#8f3f22</code></div><div class="case__swatch" style="--sw:#26231e;--tx:#fafaf8"><span>Inchiostro</span><code>#26231e</code></div></div>
+                <div class="case__idUi"><small>Elementi</small><div><span class="ui-btn">Prenota un tavolo →</span><span class="ui-tag">Menu d'autunno</span></div></div>
+              </div>
+            </section>
+            <button class="case__next case__next--ferri" data-step="1"><span>Prossimo concept</span><b>Ferri &amp; Associati →</b></button>
+          </article>
+
+          <!-- ================= CONCEPT 2 — FERRI & ASSOCIATI (commercialisti) =================
+               Editoriale in bianco e nero: poco testo, foto grandi,
+               ritratti degli associati come in una rivista. -->
+          <article class="slide case case--ferri" data-slide="1">
+            <header class="case__cover">
+              <div class="case__coverTop"><span>Concept 02 — Commercialisti</span><span>Source Lab · Caso studio</span></div>
+              <h2 class="case__logo">Ferri &amp; Associati</h2>
+              <div class="case__coverBottom"><p class="case__lead">Il sito di uno studio di commercialisti che vuole essere percepito per quello che è: autorevole, riservato, fatto di persone.</p><dl class="case__meta"><div><dt>Cliente</dt><dd>Studio di commercialisti</dd></div><div><dt>Pacchetto</dt><dd>Sito Aziendale</dd></div><div><dt>Tempi</dt><dd>Circa 4 settimane</dd></div><div><dt>Servizi</dt><dd>Design, sviluppo, contenuti</dd></div></dl></div>
+            </header>
+            <div class="case__hero">
+              <div class="browser">
+                <div class="browser__bar"><i></i><i></i><i></i><span>ferri &amp; associati — concept</span></div>
+                <div class="browser__screen"><div class="page c2">
+                  <nav><b class="c2__mark">Ferri &amp; Associati</b><span>Studio&ensp;&ensp;&ensp;Persone&ensp;&ensp;&ensp;Competenze&ensp;&ensp;&ensp;Contatti</span></nav>
+                  <header class="c2__hero">
+                    <div class="c2__heroTop"><small>Dottori commercialisti<br />Da vent'anni</small><h4>Numeri,<br />con discrezione.</h4></div>
+                    <div class="c2__heroImg" style="--img:url('https://images.unsplash.com/photo-1761381520581-e2ac300b829d?auto=format&fit=crop&w=1600&q=75')"></div>
+                  </header>
+                  <section class="c2__intro"><small>Lo studio</small><p>Da vent'anni accompagniamo imprese e famiglie nelle scelte che contano. Pochi clienti, seguiti da vicino.</p></section>
+                  <section class="c2__people">
+                    <div class="c2__head"><small>Le persone</small><small>04</small></div>
+                    <div class="c2__grid">
+                      <figure><i style="--img:url('https://images.unsplash.com/photo-1453396450673-3fe83d2db2c4?auto=format&fit=crop&w=600&q=75')"></i><figcaption>Marco Ferri<small>Socio fondatore</small></figcaption></figure>
+                      <figure><i style="--img:url('https://images.unsplash.com/photo-1733348137479-2e726d326d9b?auto=format&fit=crop&w=600&q=75')"></i><figcaption>Elena Sarti<small>Socia</small></figcaption></figure>
+                      <figure><i style="--img:url('https://images.unsplash.com/photo-1608235882291-02e3b888f3ee?auto=format&fit=crop&w=600&q=75')"></i><figcaption>Luca Morandi<small>Fiscalità d'impresa</small></figcaption></figure>
+                      <figure><i style="--img:url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=75')"></i><figcaption>Giulia Conti<small>Successioni</small></figcaption></figure>
+                    </div>
+                  </section>
+                  <section class="c2__index">
+                    <small>Competenze</small>
+                    <ol><li><span>01</span>Contabilità e bilancio</li><li><span>02</span>Fiscalità d'impresa</li><li><span>03</span>Operazioni societarie</li><li><span>04</span>Patrimoni e successioni</li></ol>
+                  </section>
+                  <section class="c2__wide" style="--img:url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=1600&q=75')"><span>Lo studio</span></section>
+                  <footer>
+                    <div><small>Indirizzo</small>In centro città<br />Indirizzo di esempio</div>
+                    <div><small>Contatti</small>Scrivici o chiamaci<br />Rispondiamo entro un giorno</div>
+                    <div><small>Ricevimento</small>Lun–Ven, su appuntamento</div>
+                    <b class="c2__mark c2__mark--big">Ferri &amp; Associati</b>
+                  </footer>
+                </div></div>
+              </div>
+            </div>
+            <div class="case__text">
+              <div><span class="case__num">01</span><h3>La sfida</h3><p>Uno studio di prestigio che online si presentava con un sito generico, uguale a quello di cento altri studi.</p></div>
+              <div><span class="case__num">02</span><h3>La soluzione</h3><p>Un sito editoriale in bianco e nero: poche parole, i ritratti degli associati al centro e le competenze in un indice chiaro.</p></div>
+              <div><span class="case__num">03</span><h3>Il risultato</h3><p>Un'immagine all'altezza dello studio, che rassicura chi arriva dal passaparola e fa scegliere a colpo d'occhio la persona giusta.</p></div>
+            </div>
+            <div class="case__duo">
+              <div class="case__phone"><div class="phone"><div class="phone__screen"><div class="page m2">
+                <nav><b class="c2__mark">Ferri &amp; Associati</b><span>Menu</span></nav>
+                <header><small>Dottori commercialisti</small><h4>Numeri, con discrezione.</h4></header>
+                <div class="m2__img" style="--img:url('https://images.unsplash.com/photo-1761381520581-e2ac300b829d?auto=format&fit=crop&w=600&q=75')"></div>
+                <div class="m2__grid">
+                  <figure><i style="--img:url('https://images.unsplash.com/photo-1453396450673-3fe83d2db2c4?auto=format&fit=crop&w=300&q=75')"></i><figcaption>Marco Ferri</figcaption></figure>
+                  <figure><i style="--img:url('https://images.unsplash.com/photo-1733348137479-2e726d326d9b?auto=format&fit=crop&w=300&q=75')"></i><figcaption>Elena Sarti</figcaption></figure>
+                  <figure><i style="--img:url('https://images.unsplash.com/photo-1608235882291-02e3b888f3ee?auto=format&fit=crop&w=300&q=75')"></i><figcaption>Luca Morandi</figcaption></figure>
+                  <figure><i style="--img:url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=75')"></i><figcaption>Giulia Conti</figcaption></figure>
+                </div>
+                <ol class="m2__index"><li>Contabilità e bilancio</li><li>Fiscalità d'impresa</li><li>Patrimoni e successioni</li></ol>
+              </div></div></div></div>
+              <figure class="case__img is-bw" style="--img:url('https://images.unsplash.com/photo-1453396450673-3fe83d2db2c4?auto=format&fit=crop&w=1200&q=75')"></figure>
+            </div>
+            <section class="case__identity">
+              <div class="case__secHead"><span class="case__num">04</span><h3>Identità</h3><p>Logo, caratteri, colori ed elementi dell'interfaccia: un sistema coerente, pensato solo per questo cliente.</p></div>
+              <div class="case__idGrid">
+                <div class="case__idLogo"><b class="case__logo case__logo--sm">Ferri &amp; Associati</b><small>Logotipo</small></div>
+                <div class="case__idType">
+                  <div class="case__spec case__spec--head"><span class="case__aa">Aa</span><div><b>Libre Caslon Display</b><p>Serif tradizionale, da studio storico: autorevole e affidabile.</p><span class="case__abc">ABCDEFGHIJKLM abcdefghijklm 0123456789</span></div></div>
+                  <div class="case__spec case__spec--body"><span class="case__aa">Aa</span><div><b>IBM Plex Sans</b><p>Preciso e tecnico, con Plex Mono per numeri ed etichette.</p></div></div>
+                </div>
+                <div class="case__idColors"><div class="case__swatch" style="--sw:#fafaf8;--tx:#17130f"><span>Bianco</span><code>#fafaf8</code></div><div class="case__swatch" style="--sw:#0d0d0d;--tx:#fafaf8"><span>Nero</span><code>#0d0d0d</code></div><div class="case__swatch" style="--sw:#3a3a37;--tx:#fafaf8"><span>Grafite</span><code>#3a3a37</code></div><div class="case__swatch" style="--sw:#8a8a85;--tx:#fafaf8"><span>Grigio</span><code>#8a8a85</code></div></div>
+                <div class="case__idUi"><small>Elementi</small><div><span class="ui-btn">Fissa un appuntamento</span><span class="ui-tag">01 — Fiscalità d'impresa</span></div></div>
+              </div>
+            </section>
+            <button class="case__next case__next--norda" data-step="1"><span>Prossimo concept</span><b>NORDA →</b></button>
+          </article>
+
+          <!-- ================= CONCEPT 3 — NORDA ================= -->
+          <article class="slide case case--norda" data-slide="2">
+            <header class="case__cover">
+              <div class="case__coverTop"><span>Concept 03 — Negozio online</span><span>Source Lab · Caso studio</span></div>
+              <h2 class="case__logo">NORDA</h2>
+              <div class="case__coverBottom"><p class="case__lead">Un e-commerce per un marchio di abbigliamento essenziale, pensato prima di tutto per chi compra dal telefono.</p><dl class="case__meta"><div><dt>Cliente</dt><dd>Abbigliamento · Online</dd></div><div><dt>Pacchetto</dt><dd>E-commerce</dd></div><div><dt>Tempi</dt><dd>Circa 6 settimane</dd></div><div><dt>Servizi</dt><dd>Design, e-commerce, pagamenti</dd></div></dl></div>
+            </header>
+            <div class="case__hero">
+              <div class="browser">
+                <div class="browser__bar"><i></i><i></i><i></i><span>norda — concept</span></div>
+                <div class="browser__screen"><div class="page c3">
+                  <div class="c3__ribbon">Spedizione gratuita sopra i 100 € · Resi in 30 giorni</div>
+                  <nav><span>Donna&nbsp;&nbsp;Uomo&nbsp;&nbsp;Nuovi arrivi</span><b>NORDA</b><span>Cerca&nbsp;&nbsp;Account&nbsp;&nbsp;<u>Carrello (2)</u></span></nav>
+                  <header class="c3__hero">
+                    <div class="c3__heroImg" style="--img:url('https://images.unsplash.com/photo-1571513800374-df1bbe650e56?auto=format&fit=crop&w=900&q=75')"></div>
+                    <div class="c3__heroTxt"><small>Collezione Inverno</small><h4>Essenziale,<br />per sempre.</h4><span class="c3__btn">Scopri la collezione</span></div>
+                  </header>
+                  <section class="c3__grid">
+                    <div><i style="--img:url('https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?auto=format&fit=crop&w=500&q=75')"><em>Nuovo</em></i><span>Giacca in pelle</span><b>€ 289</b></div>
+                    <div><i style="--img:url('https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=500&q=75')"></i><span>Cardigan in lana</span><b>€ 119</b></div>
+                    <div><i style="--img:url('https://images.unsplash.com/photo-1761896902115-49793a359daf?auto=format&fit=crop&w=500&q=75')"><em>-20%</em></i><span>Camicia in cotone</span><b>€ 69</b></div>
+                    <div><i style="--img:url('https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=500&q=75')"></i><span>Mocassini in cuoio</span><b>€ 159</b></div>
+                  </section>
+                  <section class="c3__split">
+                    <div style="--img:url('https://images.unsplash.com/photo-1614786269829-d24616faf56d?auto=format&fit=crop&w=700&q=75')"><span>Donna</span></div>
+                    <div style="--img:url('https://images.unsplash.com/photo-1467043237213-65f2da53396f?auto=format&fit=crop&w=700&q=75')"><span>Uomo</span></div>
+                  </section>
+                  <section class="c3__perks"><div><b>Spedizione 24h</b><small>Gratis sopra i 100 €</small></div><div><b>Resi facili</b><small>30 giorni</small></div><div><b>Pagamenti sicuri</b><small>Carta e portafogli digitali</small></div></section>
+                  <footer><b>NORDA</b><span>Iscriviti alla newsletter · −10% sul primo ordine</span></footer>
+                </div></div>
+              </div>
+            </div>
+            <div class="case__text">
+              <div><span class="case__num">01</span><h3>La sfida</h3><p>Un marchio che vendeva solo in negozio e su Instagram, senza un vero negozio online e con molti ordini persi nei messaggi.</p></div>
+              <div><span class="case__num">02</span><h3>La soluzione</h3><p>Un negozio pulito e veloce: foto grandi, taglie chiare, carrello sempre a portata di mano e pagamento in un solo passaggio.</p></div>
+              <div><span class="case__num">03</span><h3>Il risultato</h3><p>Si compra dal telefono in meno di un minuto. Ordini, spedizioni e resi in un solo posto, niente più messaggi persi.</p></div>
+            </div>
+            <div class="case__duo">
+              <div class="case__phone"><div class="phone"><div class="phone__screen"><div class="page m3">
+                <nav><span>☰</span><b>NORDA</b><span>🛍 2</span></nav>
+                <header style="--img:url('https://images.unsplash.com/photo-1571513800374-df1bbe650e56?auto=format&fit=crop&w=500&q=75')"><h4>Essenziale, per sempre.</h4></header>
+                <div class="m3__grid">
+                  <div><i style="--img:url('https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?auto=format&fit=crop&w=300&q=75')"></i><span>Giacca in pelle</span><b>€ 289</b></div>
+                  <div><i style="--img:url('https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=300&q=75')"></i><span>Cardigan</span><b>€ 119</b></div>
+                  <div><i style="--img:url('https://images.unsplash.com/photo-1761896902115-49793a359daf?auto=format&fit=crop&w=300&q=75')"></i><span>Camicia</span><b>€ 69</b></div>
+                  <div><i style="--img:url('https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?auto=format&fit=crop&w=300&q=75')"></i><span>Mocassini</span><b>€ 159</b></div>
+                </div>
+                <div class="m3__pay">Acquista ora</div>
+              </div></div></div></div>
+              <figure class="case__img" style="--img:url('https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?auto=format&fit=crop&w=1200&q=75')"></figure>
+            </div>
+            <section class="case__identity">
+              <div class="case__secHead"><span class="case__num">04</span><h3>Identità</h3><p>Logo, caratteri, colori ed elementi dell'interfaccia: un sistema coerente, pensato solo per questo cliente.</p></div>
+              <div class="case__idGrid">
+                <div class="case__idLogo"><b class="case__logo case__logo--sm">NORDA</b><small>Logotipo</small></div>
+                <div class="case__idType">
+                  <div class="case__spec case__spec--head"><span class="case__aa">Aa</span><div><b>Archivo Expanded</b><p>Largo e geometrico, come un'etichetta cucita.</p><span class="case__abc">ABCDEFGHIJKLM abcdefghijklm 0123456789</span></div></div>
+                  <div class="case__spec case__spec--body"><span class="case__aa">Aa</span><div><b>Archivo</b><p>Lo stesso carattere in versione normale, per schede e prezzi.</p></div></div>
+                </div>
+                <div class="case__idColors"><div class="case__swatch" style="--sw:#f7f6f2;--tx:#17130f"><span>Avorio</span><code>#f7f6f2</code></div><div class="case__swatch" style="--sw:#111111;--tx:#fafaf8"><span>Inchiostro</span><code>#111111</code></div><div class="case__swatch" style="--sw:#c8b89f;--tx:#17130f"><span>Sabbia</span><code>#c8b89f</code></div><div class="case__swatch" style="--sw:#e9e3d8;--tx:#17130f"><span>Pietra</span><code>#e9e3d8</code></div></div>
+                <div class="case__idUi"><small>Elementi</small><div><span class="ui-btn">Aggiungi al carrello</span><span class="ui-tag">Nuovo</span></div></div>
+              </div>
+            </section>
+            <button class="case__next case__next--brace" data-step="1"><span>Prossimo concept</span><b>brace →</b></button>
+          </article>
+        </div>
+      <p class="showcase__note">Concept dimostrativi: nomi e attività sono di esempio · Foto: Unsplash</p>
+    </div>
+  </div>
+
+  <!-- Scroll fluido (libreria Lenis) -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="script.js?v=20"></script>
+  <script src="liquid.js?v=4"></script>
+  <script src="motion.js?v=8"></script>
+  <script src="scroll-hint.js?v=1"></script>
+  <script src="transition.js?v=1"></script>
+</body>
+</html>
