@@ -143,11 +143,20 @@ html.pt-in body::after { content: ""; position: fixed; inset: 0; z-index: 299; b
 }
 @keyframes mouse-wheel { 0% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(9px); opacity: 0; } 61% { transform: translateY(0); opacity: 0; } 100% { opacity: 1; } }
 .hero__scroll--mouse { gap: 12px; align-items: center; }
-.hero__scroll--mouse .arrow, .hero__scroll--mouse .hint-touch { display: none; }
-/* sul telefono niente mouse: "Scorri ↓" */
+.hero__scroll--mouse .hint-touch, .finger-ico { display: none; }
+/* telefoni e tablet: al posto del mouse un dito che scorre verso l'alto */
+.finger-ico { position: relative; width: 22px; height: 30px; flex: none; color: currentColor; }
+.finger-ico svg { position: absolute; left: 0; bottom: 0; width: 22px; height: 22px; animation: finger-swipe 1.8s cubic-bezier(.65,0,.35,1) infinite; }
+.finger-ico::before {
+  content: ""; position: absolute; left: 9px; top: 0; width: 2px; height: 14px; border-radius: 2px;
+  background: linear-gradient(#c6ff3d, transparent); opacity: 0; animation: finger-trail 1.8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes finger-swipe { 0% { transform: translateY(6px); opacity: 0; } 20% { opacity: 1; } 70% { transform: translateY(-6px); opacity: 1; } 100% { transform: translateY(-6px); opacity: 0; } }
+@keyframes finger-trail { 0%, 30% { opacity: 0; transform: scaleY(.3); transform-origin: top; } 70% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; } }
 @media (hover: none) {
   .hero__scroll--mouse .mouse-ico, .hero__scroll--mouse .hint-desk { display: none; }
-  .hero__scroll--mouse .arrow, .hero__scroll--mouse .hint-touch { display: inline; }
+  .hero__scroll--mouse .hint-touch { display: inline; }
+  .finger-ico { display: inline-block; }
 }
 
 /* promemoria che compare se ti fermi a metà pagina */
@@ -162,5 +171,5 @@ html.pt-in body::after { content: ""; position: fixed; inset: 0; z-index: 299; b
 .scroll-hint.is-on { opacity: 1; transform: none; }
 .scroll-hint .mouse-ico { width: 14px; height: 22px; border-radius: 8px; }
 .scroll-hint .mouse-ico::after { top: 4px; height: 5px; }
-@media (hover: none) { .scroll-hint .mouse-ico { display: none; } .scroll-hint::before { content: "↓"; color: #c6ff3d; } }
-@media (prefers-reduced-motion: reduce) { .mouse-ico::after { animation: none; } }
+@media (hover: none) { .scroll-hint .mouse-ico { display: none; } .scroll-hint .finger-ico { width: 18px; height: 24px; } .scroll-hint .finger-ico svg { width: 18px; height: 18px; } }
+@media (prefers-reduced-motion: reduce) { .mouse-ico::after, .finger-ico svg, .finger-ico::before { animation: none; } }
